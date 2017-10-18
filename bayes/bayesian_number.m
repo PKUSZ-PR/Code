@@ -1,6 +1,7 @@
+%Load training sample
 trainLables = loadMNISTLabels('train-labels-idx1-ubyte');
 trainImages = loadMNISTImages('train-images-idx3-ubyte');
-[pc,score,latent,tsquare] = pca(trainImages');
+[pc,score,latent,tsquare] = pca(trainImages'); %use pca function to extract decrease dims from 28*28 to 108
 trainImages = pc(:,1:108)' * trainImages;
 
 totalNum = zeros(1, 10);
@@ -24,6 +25,7 @@ for i=1:size(trainLables, 1)
         u(idx + 1,:) = u(idx + 1,:) + x;
         tmpMat(totalNum(idx + 1),:, idx + 1) = x;
 end
+%Calculate the prior probability of class and mean vectors
 for i=1:10
     pwi(i) = vpa(totalNum(i) / trainNum, 10);
     u(i,:) = vpa(u(i,:) / totalNum(i),10);
@@ -39,7 +41,8 @@ for i=1:size(totalNum,2)
     sigma_det(i) = det(sigma_tmp);
     sigma(:,:,i) =  sigma_tmp;
 end
-
+%Load test samples and start to test
+%g_x is discrimenant function
 testLables = loadMNISTLabels('t10k-labels-idx1-ubyte');
 testImages = loadMNISTImages('t10k-images-idx3-ubyte');
 testImages = pc(:,1:108)' * testImages;
@@ -62,7 +65,7 @@ for i=1:testNum
         correct = correct + 1;
     end
 end
-
+%Accurancy of our bayesian classifier
 rs = correct / testNum
         
         
