@@ -1,7 +1,7 @@
 trainLables = loadMNISTLabels('train-labels-idx1-ubyte');
 trainImages = loadMNISTImages('train-images-idx3-ubyte');
 [pc,score,latent,tsquare] = pca(trainImages');
-trainImages = (trainImages' * pc(:,1:108))';
+trainImages = pc(:,1:108)' * trainImages;
 
 totalNum = zeros(1, 10);
 pwi = zeros(1, 10);
@@ -17,7 +17,7 @@ for i=1:10
 end
 
 
-for i=1:size(trainLables, 2)
+for i=1:size(trainLables, 1)
         idx = trainLables(i);
         totalNum(idx + 1) = totalNum(idx + 1) + 1;
         x = trainImages(:, i)';
@@ -28,7 +28,7 @@ for i=1:10
     pwi(i) = vpa(totalNum(i) / trainNum, 10);
     u(i,:) = vpa(u(i,:) / totalNum(i),10);
 end
-for i=1:size(totalNum,1)
+for i=1:size(totalNum,2)
     tmp_mat = zeros(totalNum(i), nrow );
     for j=1:totalNum(i)
         x = reshape(tmpMat(j,:, i), 1, nrow);
@@ -44,8 +44,7 @@ end
 
 testLables = loadMNISTLabels('t10k-labels-idx1-ubyte');
 testImages = loadMNISTImages('t10k-images-idx3-ubyte');
-[pc,score,latent,tsquare] = pca(testImages');
-testImages = (testImages' * pc(:,1:108))';
+testImages = pc(:,1:108)' * testImages;
 testNum = 10000;
 correct = 0;
 for i=1:testNum
