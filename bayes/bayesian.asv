@@ -44,6 +44,7 @@ end
 
 %Start to test
 %g_x is discrimenant function 
+%if g_x(a) is better 
 testNum = 4000;
 correct = 0;
 output = zeros(markZ - markA + 1, 400);
@@ -66,7 +67,7 @@ for i=1:markZ - markA + 1
         end
     end
 end
-%Accurancy of our classifier
+
 rs = correct / testNum;
         
 

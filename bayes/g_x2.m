@@ -1,9 +1,11 @@
 function rs=g_x2(pwi, sigma, sigma_det, x, u)
-%pwi 
-%sigma
-%sigma_det
-%x
-%u
+%dircimenant function of class of which samples match gaussian distribution
+%pwi  the  prior probability of class i
+%sigma the convariance matrix of class i
+%sigma_det the det of convariance matrix
+%x the sample with n dims
+%u the mean of training samples
+%rs the return value of the function
 nr = size(x,2);
 x = reshape(x, 1, nr);
 sigma_t = reshape(sigma, nr, nr);

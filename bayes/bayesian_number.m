@@ -34,9 +34,7 @@ for i=1:size(totalNum,2)
         x = reshape(tmpMat(j,:, i), 1, nrow);
         tmp_mat(j,:) = x;
     end
-%     sigma_tmp = vpa(cov(tmp_mat), 7);
-%     sigma_det(i) = vpa(det(sigma_tmp), 7);
-%     sigma(:,:,i) = vpa(sigma_tmp, 7);
+
     sigma_tmp = cov(tmp_mat);
     sigma_det(i) = det(sigma_tmp);
     sigma(:,:,i) =  sigma_tmp;
