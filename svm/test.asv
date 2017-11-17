@@ -1,0 +1,3 @@
+i = imread('haha.jpg');
+imshow(i)
+imfo
