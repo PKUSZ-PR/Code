@@ -1,4 +1,4 @@
-function [set, labels] = load_images(filename)
+function [set, labels] = load_images(filename, set_num)
 
 % initialization
 img_dir = dir([filename, '*.jpg']);
