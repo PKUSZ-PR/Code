@@ -14,7 +14,7 @@ parfor i = 1:set_num
     image = imresize(image, [227, 227]);
     name_split = regexp(img_dir(i).name, '_', 'split');
     label = cell2mat(name_split(2));
-    set(:, :, :, i) = reshape(image, 1, 224, 224, 3);
+    set(:, :, :, i) = reshape(image, 1, 227, 227, 3);
     labels(i, 1) = str2double(label);
 end
 
