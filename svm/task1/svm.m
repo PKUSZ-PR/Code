@@ -12,16 +12,14 @@ parpool(cluster, cluster.num_of_workers);
 % extract the feature using cnn
 vgg_neural_network = vgg16;
 layer = 'fc7';
-training_features = activations(vgg_neural_network, training_set, layer);
-test_features = activations(vgg_neural_network, test_set, layer);
-clear training_set;
-clear test_set;
+training_set = activations(vgg_neural_network, training_set, layer);
+test_set = activations(vgg_neural_network, test_set, layer);
 
 % use PCA to reduct dimension
-% eigen_vector = pca(training_features);
-% training_features = training_features * eigen_vector(:, 1:1000);
-% test_features = training_features * eigen_vector(:, 1:1000);
+eigen_vector = pca(training_set);
+training_set = training_set * eigen_vector(:, 1:4096);
+test_set = test_set * eigen_vector(:, 1:4096);
 
 % classfy the test data(male and female) using libsvm
-svm_model = svmtrain(training_labels, double(training_features), '-t 0');
-accuracy = svmpredict(test_labels, double(test_features), svm_model);
+svm_model = svmtrain(training_labels, double(training_set), '-t 0');
+accuracy = svmpredict(test_labels, double(test_set), svm_model);
