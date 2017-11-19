@@ -11,7 +11,7 @@ parfor i = 1:set_num
     if ismatrix(image)  
         image = cat(3,image,image,image);  
     end
-    image = imresize(image, [224, 224]);
+    image = imresize(image, [227, 227]);
     name_split = regexp(img_dir(i).name, '_', 'split');
     label = cell2mat(name_split(2));
     set(:, :, :, i) = reshape(image, 1, 224, 224, 3);

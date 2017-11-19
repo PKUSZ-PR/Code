@@ -10,7 +10,7 @@ parpool(cluster, cluster.num_of_workers);
 [test_set, test_labels] = load_images('./IMDB_WIKI/test_imdb_data/', 200);
 
 % extract the feature using cnn
-vgg_neural_network = vgg16;
+vgg_neural_network = alexnet;
 layer = 'fc7';
 training_features = activations(vgg_neural_network, training_set, layer);
 test_features = activations(vgg_neural_network, test_set, layer);
