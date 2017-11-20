@@ -1,7 +1,7 @@
 clc;
 
 % enable parallel computing
-if parpool('size') <= 0
+if isempty(gcp('nocreate')) == 0  
     cluster = parcluster('local');
     cluster.NumWorkers = 4;
     parpool(cluster, cluster.NumWorkers);
