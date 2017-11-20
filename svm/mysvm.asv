@@ -1,5 +1,5 @@
 
-[trainset, y, testset, yy] = dataprocess();
+[trainset, y, testset, yy] = dataprocess(addr, imgaddr, fname);
 f_dims = size(trainset,2);
 tr_n = size(trainset,1);
 te_n = size(testset, 1);
@@ -12,16 +12,18 @@ for i=1:tr_n
     w = w + lambda(i) * y(i) * reshape(trainset(i,:),1, f_dims);
 end
 l = find(lambda ~= 0);
-b = yita
+p = l(1);
+b = yita / y(p) - w*trainset(p,:)';
+
 cor = 0;
 for i=1:te_n
     c = -1;
     x = testset(i,:);
-    g = w*x' + b;
+    g = w*x' + b ;
     if g>0
         c = 1;
     end
-    if c == yy[i]
+    if c == yy(i)
         cor = cor + 1;
     end
 end

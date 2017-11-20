@@ -1,4 +1,6 @@
-[trainset, y, testset, yy] = dataprocess();
+addr = 'C:\\Users\\EP\\Desktop\\vgg_face_dataset\\files';
+fname = ['Adam_Levine', 'Taylor_Swift'];
+[trainset, y, testset, yy] = dataprocess(addr, fname);
 f_dims = size(trainset,2);
 tr_n = size(trainset,1);
 te_n = size(testset, 1);
@@ -12,7 +14,7 @@ for i=1:tr_n
 end
 l = find(lambda ~= 0);
 p = l(1);
-b = yita / y(p) - w*trainset(p,:)';
+b = -1* w*trainset(p,:)';
 
 cor = 0;
 for i=1:te_n
