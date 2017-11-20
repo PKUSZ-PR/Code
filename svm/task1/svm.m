@@ -1,9 +1,11 @@
 clc;
 
 % enable parallel computing
-cluster = parcluster('local');
-cluster.NumWorkers = 4;
-parpool(cluster, cluster.NumWorkers);
+if parpool('size') <= 0
+    cluster = parcluster('local');
+    cluster.NumWorkers = 4;
+    parpool(cluster, cluster.NumWorkers);
+end
 
 % read the data, dividing it into training set and test set
 [training_set, training_labels] = load_images('./IMDB_WIKI/train_imdb_data/', 800);
