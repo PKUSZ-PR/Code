@@ -12,7 +12,7 @@ end
 [test_set, test_labels] = load_images('./IMDB_WIKI/test_imdb_data/', 200);
 
 % extract the feature using cnn
-vgg_neural_network = alexnet;
+alex_neural_network = alexnet;
 layer = 'fc7';
 training_set = activations(vgg_neural_network, training_set, layer);
 test_set = activations(vgg_neural_network, test_set, layer);
