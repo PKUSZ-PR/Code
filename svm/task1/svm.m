@@ -14,8 +14,8 @@ end
 % extract the feature using cnn
 alex_neural_network = alexnet;
 layer = 'fc7';
-training_set = activations(vgg_neural_network, training_set, layer);
-test_set = activations(vgg_neural_network, test_set, layer);
+training_set = activations(alex_neural_network, training_set, layer);
+test_set = activations(alex_neural_network, test_set, layer);
 
 % use PCA to reduct dimension
 eigen_vector = pca(training_set);
