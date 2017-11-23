@@ -1,5 +1,5 @@
 addr = 'C:\\Users\\EP\\Desktop\\vgg_face_dataset\\files';
-fname = ['Adam_Levine', 'Taylor_Swift'];
+fname = {'Adam_Levine.txt.rt', 'Taylor_Swift.txt.rt'};
 [trainset, y, testset, yy] = dataprocess(addr, fname);
 f_dims = size(trainset,2);
 tr_n = size(trainset,1);

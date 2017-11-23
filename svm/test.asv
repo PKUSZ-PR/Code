@@ -1,3 +1,4 @@
-i = imread('haha.jpg');
-imshow(i)
-imfo
+fname = {'Adam_Levine', 'Taylor_Swift'};
+s = 'h'
+fname(1)
+s = s 

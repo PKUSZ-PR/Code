@@ -5,14 +5,15 @@ str_size = box(1) * box(2);
 features = zeros(2000,7);
 ys = ones(2000);
 n_dataset = zeros(2000,str_size);
-samp_size = zeros(size(fname,2) + 1);
-n_file = size(fname,2);
-for i = 1:size(fname, 2)
-    fn = fname(i);
-    fp = fopen(addr + '\\' + fn, '');
+samp_size = zeros(size(fname,1) + 1);
+n_file = size(fname,1);
+for i = 1:size(fname, 1)
+    fn = fname{i};
+    tfname = [addr, '\\', fn];
+    fp = fopen(tfname, 'r');
     while feof(fp)~=1
         fl = fgetl(fp);
-        s = regexp(fl, '#', 'splite');
+        s = regexp(fl, '#', 'split');
         for j = 1:size(s, 2)
             features(n, i);
         end
@@ -23,8 +24,9 @@ for i = 1:size(fname, 2)
     base = samp_size(i);
     samp_size(i) = n - 1 - samp_size(i);
     samp_size(i + 1) = sum(samp_size(1:i));
-    s1 = regexp(i, '.', 'splite');
-    pics = dir(addr + '\\' + s1(1) + '\\*.jpg');
+    s1 = regexp(fname{i}, '.', 'split');
+    tfname = [addr, '\\', s1(1), '\\','*.jpg']
+    pics = dir(tfname);
     len = samp_size(i) - base;
     for j = i:len
         img = rgb2gray(imread(pics(i)));
@@ -33,8 +35,8 @@ for i = 1:size(fname, 2)
         n_dataset(j + base,:) = reshape(img, box(1), box(2));
     end
 end
-exp  = zeros(size(fname,2));
-for i=1:size(fname,2)
+exp  = zeros(size(fname,1));
+for i=1:size(fname,1)
     exp(i) = samp_size(i) * 0.8;
 end
 idx = 1;
@@ -44,7 +46,7 @@ y = ones(2000 );
 yy = ones(2000 );
 dataset = zeros(sum(samp_size(1:n_file)), str_size);
 trainset = zeros(sum(exp), str_size);
-for i=1:size(fname,2)
+for i=1:size(fname,1)
     len = samp_size(i);
     for j=1:len
         if j <= exp(i)

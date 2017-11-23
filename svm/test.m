@@ -1,2 +1,4 @@
-a = [1,2,3,4,5];
-sum(a(1:4))
+fname = {'Adam_Levine', 'Taylor_Swift'};
+s = 'h'
+ 
+s = ['\', fname{1}]
