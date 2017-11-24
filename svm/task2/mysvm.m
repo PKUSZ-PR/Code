@@ -7,7 +7,7 @@ te_n = size(testset, 1);
 w = zeros(1,f_dims);
 yita = 0.1; 
 cc = 0.1;
-[lambda, fval, exitflag] = svm_simple(tr_n, f_dims, trainset, y,yita,cc);
+[lambda, fval, exitflag] = svm_simple(tr_n, f_dims, trainset, y, yita,cc);
 
 for i=1:tr_n
     w = w + lambda(i) * y(i) * reshape(trainset(i,:),1, f_dims);
