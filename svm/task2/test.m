@@ -1,3 +1,6 @@
-fname = ['Adam_Levine', 'Taylor_Swift'];
-a=2
-size(a,2)
+f = [1,2;2,3;];
+a(1,:,:) = f;
+a(2,:,:) = f*2;
+reshape(a, 1,5)
+
+ 
