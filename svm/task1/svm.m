@@ -8,20 +8,16 @@ if isempty(gcp('nocreate'))
 end
 
 % read the data, dividing it into training set and test set
-[training_set, training_labels] = load_images('./IMDB_WIKI/train_imdb_data/', 800);
-[test_set, test_labels] = load_images('./IMDB_WIKI/test_imdb_data/', 200);
+[set, labels] = load_images('./IMDB_WIKI/imdb_data/', 2000);
 
 % extract the feature using cnn
 alex_neural_network = alexnet;
 layer = 'fc7';
-training_set = activations(alex_neural_network, training_set, layer);
-test_set = activations(alex_neural_network, test_set, layer);
+set = activations(alex_neural_network, set, layer);
 
 % use PCA to reduct dimension
-eigen_vector = pca(training_set);
-training_set = training_set * eigen_vector(:, 1:4096);
-test_set = test_set * eigen_vector(:, 1:4096);
+eigen_vector = pca(set);
+training_set = set * eigen_vector(:, 1:4096);
 
-% classfy the test data(male and female) using libsvm
-svm_model = svmtrain(training_labels, double(training_set), '-t 0');
-accuracy = svmpredict(test_labels, double(test_set), svm_model);
+% classfy the test data(male and female) using libsvm and 10-fold validation
+svm_model = svmtrain(labels, double(training_set), '-v 10');
