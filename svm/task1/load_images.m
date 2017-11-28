@@ -2,7 +2,7 @@ function [set, labels] = load_images(filename, set_num)
 
 % initialization
 img_dir = dir([filename, '*.jpg']);
-set = zeros(224, 224, 3, set_num);
+set = zeros(227, 227, 3, set_num);
 labels = zeros(set_num, 1);
 
 % read the image
