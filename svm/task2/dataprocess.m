@@ -1,4 +1,5 @@
 function [dataset, y, trainset, yy] = dataprocess(addr, fname)
+%To process the image into a 150*200 gray picture
 n = 1;
 box = [150, 200];
 str_size = box(1) * box(2);

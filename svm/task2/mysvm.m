@@ -1,5 +1,7 @@
-addr = 'C:\\Users\\EP\\Desktop\\vgg_face_dataset\\files';
+%Read the data from file
+addr = 'C:\\Users\\EP\\Desktop\\Code\\svm\\task2';
 fname = {'Adam_Levine.txt.rt', 'Taylor_Swift.txt.rt'};
+%Get traing set and test t
 [trainset, y, testset, yy] = dataprocess(addr, fname);
 f_dims = size(trainset,2);
 tr_n = size(trainset,1);
@@ -7,8 +9,9 @@ te_n = size(testset, 1);
 w = zeros(1,f_dims);
 yita = 0.1; 
 cc = 0.1;
+%calculation the quadratic function
 [lambda, fval, exitflag] = svm_simple(tr_n, f_dims, trainset, y, yita,cc);
-
+%linear paprameter calculation
 for i=1:tr_n
     w = w + lambda(i) * y(i) * reshape(trainset(i,:),1, f_dims);
 end
@@ -21,6 +24,7 @@ for i = 1:size(l,1)
 end
 b = b / size(l,1);
 cor = 1;
+%Classify the face
 for i=1:te_n
     c = -1;
     x = 0;
